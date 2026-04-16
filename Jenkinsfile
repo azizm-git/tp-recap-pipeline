@@ -17,7 +17,7 @@ pipeline {
         stage('2 - Build Maven') {
             steps {
                 echo '=== Compilation Maven ==='
-                sh '/var/jenkins_home/tools/hudson.tasks.Maven_MavenInstallation/Maven-3.9/bin/mvn clean package'
+                sh 'mvn clean package'
             }
         }
 
