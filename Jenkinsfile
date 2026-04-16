@@ -49,8 +49,8 @@ pipeline {
             steps {
                 echo '=== Déploiement sur les nodes via Ansible ==='
                 sh """
-                /opt/ansible-venv/bin/ansible all \
-                  -i /var/jenkins_home/ansible/hosts \
+                ansible all \
+                  -i /etc/ansible/hosts \
                   -m shell \
                   -a "docker pull ${DOCKERHUB_IMAGE}:${DOCKER_TAG} && \
                       docker rm -f helloworld-app || true && \
@@ -62,7 +62,7 @@ pipeline {
         stage('6 - Verify') {
             steps {
                 echo '=== Vérification du déploiement ==='
-                sh "/opt/ansible-venv/bin/ansible all -i /var/jenkins_home/ansible/hosts -m shell -a 'docker ps | grep helloworld'"
+                sh "ansible all -i /etc/ansible/hosts -m shell -a 'docker ps | grep helloworld'"
             }
         }
     }
