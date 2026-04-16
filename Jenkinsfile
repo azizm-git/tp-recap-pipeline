@@ -62,7 +62,7 @@ pipeline {
         stage('6 - Verify') {
             steps {
                 echo '=== Vérification du déploiement ==='
-                sh "ansible all -i /etc/ansible/hosts -m shell -a 'docker ps | grep helloworld'"
+                sh 'ansible all -i /etc/ansible/hosts -m shell -a "docker ps -a | grep helloworld"'
             }
         }
     }
